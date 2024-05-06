@@ -61,15 +61,21 @@ async function updateProduct(id, name, category, price, quantity) {
     }
   );
 }
-
 /**
- * Update product price
+ * Change product price
  * @param {string} id - Product ID
- * @param {number} newPrice - New Price
+ * @param {string} price - New Price
  * @returns {Promise}
  */
-async function changePrice(id, newPrice) {
-  return Product.updateOne({ _id: id }, { $set: { price: newPrice } });
+async function changePrice(id, price) {
+  return Product.updateOne(
+    { _id: id },
+    {
+      $set: {
+        price,
+      },
+    }
+  );
 }
 
 /**
