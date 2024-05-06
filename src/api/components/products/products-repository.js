@@ -63,6 +63,16 @@ async function updateProduct(id, name, category, price, quantity) {
 }
 
 /**
+ * Update product price
+ * @param {string} id - Product ID
+ * @param {number} newPrice - New Price
+ * @returns {Promise}
+ */
+async function changePrice(id, newPrice) {
+  return Product.updateOne({ _id: id }, { $set: { price: newPrice } });
+}
+
+/**
  * Delete a product
  * @param {string} id - Product ID
  * @returns {Promise}
@@ -71,24 +81,6 @@ async function deleteProduct(id) {
   return Product.deleteOne({ _id: id });
 }
 
-/**
- * Get product by email to prevent duplicate email
- * @param {string} email - Email
- * @returns {Promise}
- */
-async function getProductByEmail(email) {
-  return Product.findOne({ email });
-}
-
-/**
- * Update product password
- * @param {string} id - Product ID
- * @param {string} password - New hashed password
- * @returns {Promise}
- */
-async function changePassword(id, password) {
-  return Product.updateOne({ _id: id }, { $set: { password } });
-}
 async function countProducts(query = {}) {
   return Product.countDocuments(query);
 }
@@ -99,7 +91,6 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  getProductByEmail,
-  changePassword,
   countProducts,
+  changePrice,
 };

@@ -48,7 +48,7 @@ module.exports = (app) => {
 
   // Change product price
   route.post(
-    '/:id/change-price',
+    '/:id/',
     authenticationMiddleware.authenticate,
     celebrate(productsValidator.changePrice),
     productsControllers.changePrice

@@ -147,21 +147,6 @@ async function deleteProduct(id) {
 }
 
 /**
- * Check whether the category is registered
- * @param {string} category - Category
- * @returns {boolean}
- */
-async function categoryIsRegistered(category) {
-  const product = await productsRepository.getProductByCategory(category);
-
-  if (product) {
-    return true;
-  }
-
-  return false;
-}
-
-/**
  * Change product price
  * @param {string} productId - Product ID
  * @param {string} price - Price
@@ -211,7 +196,6 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
-  categoryIsRegistered,
   changePrice,
   naturalSort,
 };

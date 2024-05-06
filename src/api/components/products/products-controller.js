@@ -165,7 +165,7 @@ async function changePrice(request, response, next) {
       );
     }
 
-    const success = await productsService.changeProductPrice(id, newPrice);
+    const success = await productsService.changePrice(id, newPrice);
     if (!success) {
       throw errorResponder(
         errorTypes.UNPROCESSABLE_ENTITY,
