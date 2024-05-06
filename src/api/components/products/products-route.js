@@ -2,55 +2,55 @@ const express = require('express');
 
 const authenticationMiddleware = require('../../middlewares/authentication-middleware');
 const celebrate = require('../../../core/celebrate-wrappers');
-const usersControllers = require('./users-controller');
-const usersValidator = require('./users-validator');
+const productsControllers = require('./products-controller');
+const productsValidator = require('./products-validator');
 
 const route = express.Router();
 
 module.exports = (app) => {
-  app.use('/users', route);
+  app.use('/products', route);
 
-  // Get list of users
+  // Get list of products
   route.get(
     '/',
     authenticationMiddleware.authenticate,
-    usersControllers.getUsers
+    productsControllers.getProducts
   );
-  // Create user
+  // Create product
   route.post(
     '/',
     authenticationMiddleware.authenticate,
-    celebrate(usersValidator.createUser),
-    usersControllers.createUser
+    celebrate(productsValidator.createProduct),
+    productsControllers.createProduct
   );
 
-  // Get user detail
+  // Get product detail
   route.get(
     '/:id',
     authenticationMiddleware.authenticate,
-    usersControllers.getUser
+    productsControllers.getProduct
   );
 
-  // Update user
+  // Update product
   route.put(
     '/:id',
     authenticationMiddleware.authenticate,
-    celebrate(usersValidator.updateUser),
-    usersControllers.updateUser
+    celebrate(productsValidator.updateProduct),
+    productsControllers.updateProduct
   );
 
-  // Delete user
+  // Delete product
   route.delete(
     '/:id',
     authenticationMiddleware.authenticate,
-    usersControllers.deleteUser
+    productsControllers.deleteProduct
   );
 
-  // Change password
+  // Change product price
   route.post(
-    '/:id/change-password',
+    '/:id/change-price',
     authenticationMiddleware.authenticate,
-    celebrate(usersValidator.changePassword),
-    usersControllers.changePassword
+    celebrate(productsValidator.changePrice),
+    productsControllers.changePrice
   );
 };

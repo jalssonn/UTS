@@ -4,8 +4,11 @@ const { User } = require('../../../models');
  * Get a list of users
  * @returns {Promise}
  */
-async function getUsers() {
-  return User.find({});
+async function getUsers({ query = {}, options = {} }) {
+  return User.find(query)
+    .sort(options.sort)
+    .skip(options.skip)
+    .limit(options.limit);
 }
 
 /**
@@ -80,6 +83,9 @@ async function getUserByEmail(email) {
 async function changePassword(id, password) {
   return User.updateOne({ _id: id }, { $set: { password } });
 }
+async function countUsers(query = {}) {
+  return User.countDocuments(query);
+}
 
 module.exports = {
   getUsers,
@@ -89,4 +95,5 @@ module.exports = {
   deleteUser,
   getUserByEmail,
   changePassword,
+  countUsers,
 };
